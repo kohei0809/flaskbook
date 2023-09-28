@@ -1,0 +1,15 @@
+{
+    "python.linting.flake8Enabled": true,
+    "python.formatting.provider": "none",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": true
+    },
+    "python.linting.mypyEnabled": true,
+    "python.linting.flake8Args": [
+        "--max-line-length=88",
+    ],
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+}
