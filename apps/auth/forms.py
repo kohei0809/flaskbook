@@ -3,17 +3,14 @@ from wtforms import PasswordField, StringField, SubmitField
 from wtforms.validators import DataRequired, Email, Length
 
 
-# ユーザー新規作成とユーザー編集フォームクラス
-class UserForm(FlaskForm):
-    # ユーザーフォームのusername属性のラベルとバリデータを設定する
+class SignUpForm(FlaskForm):
     username = StringField(
         "ユーザー名",
         validators=[
             DataRequired(message="ユーザー名は必須です。"),
-            Length(max=30, message="30文字以内で入力してください。"),
+            Length(1, 30, message="30文字以内で入力してください。"),
         ],
     )
-    # ユーザーフォームのemail属性のラベルとバリデータを設定する
     email = StringField(
         "メールアドレス",
         validators=[
@@ -21,10 +18,24 @@ class UserForm(FlaskForm):
             Email(message="メールアドレスの形式で入力してください。"),
         ],
     )
-    # ユーザーフォームのpassword属性のラベルとバリデータを設定する
     password = PasswordField(
         "パスワード",
         validators=[DataRequired(message="パスワードは必須です。")]
     )
     # ユーザーフォームsubmitの文言を設定する
     submit = SubmitField("新規登録")
+    
+
+class LoginForm(FlaskForm):
+    email = StringField(
+        "メールアドレス",
+        validators=[
+            DataRequired(message="メールアドレスは必須です。"),
+            Email(message="メールアドレスの形式で入力してください。"),
+        ],
+    )
+    password = PasswordField(
+        "パスワード",
+        validators=[DataRequired(message="パスワードは必須です。")]
+    )
+    submit = SubmitField("ログイン")
