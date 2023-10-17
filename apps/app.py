@@ -48,4 +48,9 @@ def create_app(config_key: str = "local"):
     # register_blueprintを使いviewsのauthをアプリへ登録する
     app.register_blueprint(auth_views.auth, url_prefix="/auth")
 
+    from apps.detector import views as dt_views
+    
+    # redister_blueprintを使いviewsのdtをアプリへ登録する
+    app.register_blueprint(dt_views.dt)
+
     return app
