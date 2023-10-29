@@ -145,12 +145,12 @@ def search():
     user_images = db.session.query(User, UserImage).join(
         UserImage, User.id == UserImage.user_id
     )
-    
+
     # GETパラメータから検索ワードを取得する
     search_text = request.args.get("search")
     user_image_tag_dict = {}
     filtered_user_images = []
-    
+
     # user_imagesをループしuser_imagesに紐ずくタグ情報を検索する
     for user_image in user_images:
         # 検索ワードがからの場合は全てのタグを取得する
@@ -169,26 +169,26 @@ def search():
                     "%" + search_text + "%"
                 )).all()
             )
-            
+
             # タグが見つからなかったら画像を返さない
             if not user_image_tags:
                 continue
-        
+
             # タグがある場合はタグ情報を取得し直す
             user_image_tags = (
                 db.session.query(UserImageTag)
                 .filter(UserImageTag.user_image_id == user_image.UserImage.id).all()
             )
-            
+
         # user_image_idをキーとする辞書にタグ情報をセットする
         user_image_tag_dict[user_image.UserImage.id] = user_image_tags
-        
+
         # 絞り込み結果のuser_image情報を配列セットする
         filtered_user_images.append(user_image)
-        
+
     delete_form = DeleteForm()
     detector_form = DetectorForm()
-    
+
     return render_template(
         "detector/index.html",
         # 絞り込んだuser_images配列を渡す
